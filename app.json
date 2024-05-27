@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "ititnow-api",
+    "slug": "ititnow-api",
+    "version": "0.0.1",
+    "description": "",
+    "sdkVersion": "51.0.0",
+    "platforms": [],
+    "ios": {
+      "bundleIdentifier": "com.anonymous.ititnow-api"
+    }
+  }
+}
