@@ -23,4 +23,15 @@ model Events {
   location    String
   author      String
   contact     String
+  userId      String
+  user        Users    @relation(fields: [userId], references: [id])
+}
+
+model Users {
+  id       String   @id @default(cuid())
+  email    String   @unique
+  password String
+  name     String
+  avatar   String?
+  events   Events[]
 }
