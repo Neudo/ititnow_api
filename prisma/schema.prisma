@@ -16,7 +16,7 @@ datasource db {
 model Events {
   id          String   @id @default(cuid())
   title       String
-  image       String
+  image       String?
   description String
   startDate   DateTime
   endDate     DateTime

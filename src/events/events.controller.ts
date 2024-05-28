@@ -3,9 +3,10 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
+  BadRequestException,
 } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
@@ -15,10 +16,26 @@ export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
   @Post()
-  create(@Body() createEventDto: CreateEventDto) {
-    return this.eventsService.createEvent(createEventDto);
+  async create(@Body() createEventDto: CreateEventDto) {
+    try {
+      const validatedData = CreateEventDto.parse(createEventDto);
+      return await this.eventsService.createEvent(validatedData);
+    } catch (e: any) {
+      throw new BadRequestException(e.errors);
+    }
   }
-
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateEventDto: CreateEventDto,
+  ) {
+    try {
+      const validateData = CreateEventDto.parse(updateEventDto);
+      return await this.eventsService.updateEvent(id, validateData);
+    } catch (e: any) {
+      throw new BadRequestException(e.errors);
+    }
+  }
   @Get()
   findAll() {
     return this.eventsService.getEvents();
@@ -28,12 +45,6 @@ export class EventsController {
   findOne(@Param('id') id: string) {
     return this.eventsService.getEvent(id);
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventDto: CreateEventDto) {
-    return this.eventsService.updateEvent(id, updateEventDto);
-  }
-
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.eventsService.deleteEvent(id);
