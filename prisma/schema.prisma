@@ -28,10 +28,14 @@ model Events {
 }
 
 model Users {
-  id       String   @id @default(cuid())
-  email    String   @unique
-  password String
-  name     String
-  avatar   String?
-  events   Events[]
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  avatar    String?
+  events    Events[]
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now())
+  nBEvents  Int      @default(0)
+
 }
