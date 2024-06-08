@@ -13,7 +13,7 @@ export class UsersService {
         id: parsedData.id,
         email: parsedData.email,
         password: parsedData.encrypted_password,
-        name: 'TestName',
+        name: 'uhhh',
         avatar: 'TestAvatar',
         isAdmin: false,
       },

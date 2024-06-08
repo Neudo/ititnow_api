@@ -41,6 +41,11 @@ export class EventsController {
     return this.eventsService.getEvents();
   }
 
+  @Get('/nextEvent')
+  findNextEvent() {
+    return this.eventsService.getNextEvent();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.eventsService.getEvent(id);

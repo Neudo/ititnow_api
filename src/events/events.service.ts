@@ -82,4 +82,14 @@ export class EventsService {
     const events = await this.prisma.events.findMany();
     return events;
   }
+
+  async getNextEvent() {
+    const event = await this.prisma.events.findFirst({
+      orderBy: {
+        startDate: 'asc',
+      },
+      take: 1,
+    });
+    return event;
+  }
 }
