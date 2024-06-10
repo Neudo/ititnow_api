@@ -79,7 +79,12 @@ export class EventsService {
   }
 
   async getEvents() {
-    const events = await this.prisma.events.findMany();
+    const events = await this.prisma.events.findMany({
+      orderBy: {
+        startDate: 'asc',
+      },
+      skip: 1,
+    });
     return events;
   }
 
