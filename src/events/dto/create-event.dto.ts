@@ -10,7 +10,7 @@ export const CreateEventDto = z.object({
   image: z.string(),
   description: z
     .string()
-    .max(500, 'La description ne doit pas dépasser 500 caractères'),
+    .max(2500, 'La description ne doit pas dépasser 2500 caractères'),
   startDate: z.string().datetime(),
   endDate: z.string().datetime(),
   location: z.string().max(50, 'Le lieu ne doit pas dépasser 50 caractères'),
