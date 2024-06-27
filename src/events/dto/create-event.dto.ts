@@ -1,13 +1,14 @@
+import { createZodDto } from '@wahyubucil/nestjs-zod-openapi';
 import { z } from 'zod';
 
-// Date format YYYY-MM-DD
-export const CreateEventDto = z.object({
+export const Event = z.object({
   id: z.any(),
   title: z
     .string()
     .min(10, 'Le titre doit contenir au moins 10 caractères')
-    .max(70, 'Le titre ne doit pas dépasser 70 caractères'),
-  image: z.string(),
+    .max(70, 'Le titre ne doit pas dépasser 70 caractères')
+    .openapi({ description: 'Display title of the event' }),
+  image: z.string().openapi({ description: 'Not requiered' }),
   description: z
     .string()
     .max(2500, 'La description ne doit pas dépasser 2500 caractères'),
@@ -19,4 +20,10 @@ export const CreateEventDto = z.object({
   userId: z.string(),
 });
 
-export type CreateEventDto = z.infer<typeof CreateEventDto>;
+export class EventDto extends createZodDto(Event) {}
+export class CreateEventDto extends createZodDto(Event) {}
+
+export const GetEvent = z.object({
+  events: z.array(z.string()),
+});
+export class GetEventsDto extends createZodDto(GetEvent) {}

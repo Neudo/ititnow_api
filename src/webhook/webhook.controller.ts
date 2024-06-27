@@ -6,12 +6,22 @@ import {
   Post,
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('webhooks')
 export class WebhooksController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('supabase')
+  @ApiOperation({ summary: 'Handle users' })
+  @ApiResponse({
+    status: 204,
+    description: 'The user has been successfully deleted.',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal Server Error. An unexpected error occurred.',
+  })
   async handleSupabaseEvent(@Body() data: any) {
     const { type, record, old_record } = data;
     // console.log('Received event:', type, record, old_record);
