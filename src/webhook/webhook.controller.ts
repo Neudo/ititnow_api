@@ -16,7 +16,7 @@ export class WebhooksController {
   @ApiOperation({ summary: 'Handle users' })
   @ApiResponse({
     status: 204,
-    description: 'The user has been successfully deleted.',
+    description: 'The user has been successfully created.',
   })
   @ApiResponse({
     status: 500,
