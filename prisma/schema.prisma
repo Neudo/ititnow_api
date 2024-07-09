@@ -37,5 +37,6 @@ model Users {
   isAdmin   Boolean  @default(false)
   createdAt DateTime @default(now())
   nBEvents  Int      @default(0)
-
+  // Payement
+  stripeCustomerId String?
 }

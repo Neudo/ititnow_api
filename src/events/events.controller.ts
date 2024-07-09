@@ -7,10 +7,12 @@ import {
   Delete,
   Put,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { EventsService } from './events.service';
 import { CreateEventDto, EventDto } from './dto/create-event.dto';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreditsGuard } from '@/credit.guard';
 
 @ApiTags('events')
 @Controller('events')
@@ -18,6 +20,7 @@ export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
   @Post()
+  @UseGuards(CreditsGuard)
   @ApiOperation({ summary: 'Create an event' })
   @ApiResponse({
     status: 201,

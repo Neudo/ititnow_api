@@ -5,9 +5,16 @@ import { UsersModule } from './users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from '@wahyubucil/nestjs-zod-openapi';
+import { StripeModule } from './stripe/stripe.module';
 
 @Module({
-  imports: [EventsModule, WebhookModule, UsersModule, PrismaModule],
+  imports: [
+    EventsModule,
+    WebhookModule,
+    UsersModule,
+    PrismaModule,
+    StripeModule.forRootAsync(),
+  ],
   controllers: [],
   providers: [
     {
